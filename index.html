@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="static/style.css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <title>Mumbai House Price Predictor</title>
+  </head>
+  <body class="bg-dark">
+
+    <div class="container">
+
+        <div class="card mt-58"  >
+          <div class="card-header">
+            <div class="col-12" style="text-align: center">
+              <h1>Mumbai House Price Predictor</h1>
+            </div>
+          </div>
+          <div class="card-body">
+            <form method="post" action="utf-8">
+              <div class="col-18 form-group">
+                <label><b>Area</b></label>
+                <input class="form-control" type="text" id="area" name="area"  >
+              </div>
+
+
+              <div class="col-18 form-group" >
+                <label><b>Select Location</b></label>
+                <select class="Selectpicker form-control" id ="location" name="location" recquired="1" >
+                  {% for c in location %}
+                    <option value="{{ c }}">{{ c }}</option>
+                   {% endfor %}
+                </select>
+              </div>
+
+
+
+              <div class="col-18 form-group" >
+                <label><b>No of Bedrooms</b></label>
+                <select class="Selectpicker form-control" id ="No_of_Bedroom" name="No_of_Bedroom" recquired="1">
+                  {% for c in No_of_Bedroom %}
+                    <option value="{{ c }}">{{ c }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+
+              <div class="col-18 form-group" >
+                <label><b>Gymnasium</b></label>
+                <select class="Selectpicker form-control" id ="Gymnasium" name="Gymnasium" recquired="1">
+                  <{% for c in Gymnasium %}
+                    <option value="{{ c }}">{{ c }}</option>
+                  {% endfor %}
+                </select></div>
+
+                <div class="col-18 form-group" >
+                <label><b>Car Parking</b></label>
+                <select class="Selectpicker form-control" id ="Car_Parking" name="Car_Parking" recquired="1">
+                  <{% for c in Car_Parking %}
+                    <option value="{{ c }}">{{ c }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+
+                <div class="col-18 form-group" >
+                <label><b>Gardens</b></label><br>
+                <select class="Selectpicker form-control" id ="Gardens" name="Gardens" recquired="1">
+                  <{% for c in Gardens %}
+                    <option value="{{ c }}">{{ c }}</option>
+                  {% endfor %}
+                </select>
+                </div>
+
+                <div class="col-18 form-group" >
+                <label><b>Swimming Pools</b></label><br>
+                <select class="Selectpicker form-control" id ="Swimming_Pool" name="Swimming_Pool" recquired="1">
+                  <{% for c in Swimming_Pool %}
+                    <option value="{{ c }}">{{ c }}</option>
+                  {% endfor %}
+                </select>
+                </div>
+
+                <div class="col-18 form-group" >
+                <button class="btn btn-primary form-control" onclick="send_data()">Predict Price</button>
+                </div>
+            </form>
+            <br>
+            <div class="row">
+              <div class="col-12" style="text-align:center">
+                <h3><span id="prediction"></span></h3>
+              </div>
+            </div>
+
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  <script>
+
+  function form_handler(event) {
+        event.preventDefault(); // Don't submit the form normally
+    }
+    function send_data()
+    {
+        document.querySelector('form').addEventListener("submit",form_handler);
+
+        var fd=new FormData(document.querySelector('form'));
+
+        var xhr= new XMLHttpRequest({mozSystem: true});
+
+        xhr.open('POST','/predict',true);
+        document.getElementById('prediction').innerHTML="Wait! Predicting Price.....";
+        xhr.onreadystatechange = function(){
+            if(xhr.readyState == XMLHttpRequest.DONE){
+                document.getElementById('prediction').innerHTML="Prediction: ₹"+xhr.responseText;
+
+            }
+        };
+
+        xhr.onload= function(){};
+
+        xhr.send(fd);
+    }
+
+
+  </script>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>
+</html>
