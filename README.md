@@ -14,5 +14,5 @@ Model Score
             Random Forest Regressor r2 Score = 78%
             Linear Regressor r2 Score = 81%
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-In the webframe, enter Area sqft in the input box and then select the number of bedrooms. After that, choose if you require a gym, parking, gardens, or a swimming pool in your location; this will generate a price based on your selections. 
+In the webframe, enter Area sqft in the input box and then select the number of bedrooms. After that, choose if you require a gym, parking, gardens, or a swimming pool in your location; this will Predict a price based on your selections. 
 
